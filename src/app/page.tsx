@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const TOTAL_PAIRS = 12;
 
@@ -12,6 +13,7 @@ interface CardType {
 }
 
 export default function Page() {
+  const router = useRouter();
   const [cards, setCards] = useState<CardType[]>([]);
   const [flipped, setFlipped] = useState<number[]>([]);
   const [matched, setMatched] = useState<number[]>([]);
@@ -19,7 +21,7 @@ export default function Page() {
   const [time, setTime] = useState(0);
   const [timerRunning, setTimerRunning] = useState(false);
   const [ranking, setRanking] = useState<{ name: string; time: number; attempts: number }[]>([]);
-
+  const [showCongratulations, setShowCongratulations] = useState(false);
   const [playerName, setPlayerName] = useState("");
   const [gameStarted, setGameStarted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -59,6 +61,7 @@ export default function Page() {
     setAttempts(0);
     setTime(0);
     setTimerRunning(true);
+    setShowCongratulations(false);
   };
 
   const handleFlip = (cardId: number) => {
@@ -75,7 +78,7 @@ export default function Page() {
 
     if (flipSoundRef.current) {
       flipSoundRef.current.currentTime = 0;
-      flipSoundRef.current.play();
+      flipSoundRef.current.play().catch(e => console.log("Error de sonido:", e));
     }
 
     if (newFlipped.length === 2) {
@@ -106,8 +109,13 @@ export default function Page() {
         .slice(0, 5);
       setRanking(updatedRanking);
       localStorage.setItem("ranking", JSON.stringify(updatedRanking));
+      setShowCongratulations(true);
     }
   }, [matched]);
+
+  const closeCongratulations = () => {
+    setShowCongratulations(false);
+  };
 
   const handleStartGame = () => {
     if (playerName.trim() === "") return;
@@ -116,41 +124,102 @@ export default function Page() {
   };
 
   const Navbar = () => (
-    <div className="absolute top-4 left-4 z-50">
-      <button
-        className="text-white text-3xl"
-        onClick={() => setMenuOpen(!menuOpen)}
-      >
-        ☰
-      </button>
-      {menuOpen && (
-        <div className="mt-2 bg-[#2e221f] border border-[#a87c4f] text-[#f5e5b8] p-4 rounded shadow-lg w-48">
-          <ul className="space-y-2">
-            <li>
-              <Link href="/acerca-de" className="hover:underline">📘 Acerca de</Link>
-            </li>
-            <li>
-              <a href="#" className="hover:underline">🎲 Más juegos</a>
-            </li>
-            <li>
-              <button onClick={() => {
-                setGameStarted(false);
-                setPlayerName("");
-                setMenuOpen(false);
-              }} className="hover:underline w-full text-left">🔙 Menú principal</button>
-            </li>
-          </ul>
+    <div className="fixed top-0 left-0 right-0 z-50">
+      <div className="h-1 bg-gradient-to-r from-[#a87c4f] via-[#d4af7f] to-[#a87c4f]"></div>
+      
+      <div className="bg-[#2e221f]/95 backdrop-blur-md px-6 py-3 flex justify-between items-center shadow-lg">
+        <Link href="/" className="flex items-center group">
+          <div className="text-3xl mr-2 text-[#d4af7f] group-hover:rotate-12 transition-transform">♛</div>
+          <span className="text-2xl font-bold text-[#f5e5b8] font-medieval tracking-wider">Memorama</span>
+        </Link>
+
+        <div className="flex space-x-4">
+          <button
+            onClick={() => router.push('/acerca-de')}
+            className="relative group flex flex-col items-center px-3 py-2 rounded-lg transition-all duration-300 hover:bg-[#3c2f2f]"
+          >
+            <span className="text-2xl mb-1 group-hover:scale-110 group-hover:text-[#f5e5b8] transition-all">
+              📘
+            </span>
+            <span className="text-xs text-[#d4af7f] opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-5">
+              Acerca de
+            </span>
+            <div className="absolute bottom-0 h-0.5 bg-[#d4af7f] w-0 group-hover:w-full transition-all duration-300"></div>
+          </button>
+          
+          <button
+            onClick={() => {
+              alert("Instrucciones del juego:\n\n1. Encuentra todas las parejas de cartas\n2. Haz clic en dos cartas para voltearlas\n3. Si son iguales, permanecerán visibles\n4. Completa el juego en el menor tiempo y con los menos intentos posibles");
+            }}
+            className="relative group flex flex-col items-center px-3 py-2 rounded-lg transition-all duration-300 hover:bg-[#3c2f2f]"
+          >
+            <span className="text-2xl mb-1 group-hover:scale-110 group-hover:text-[#f5e5b8] transition-all">
+              📝
+            </span>
+            <span className="text-xs text-[#d4af7f] opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-5">
+              Instrucciones
+            </span>
+            <div className="absolute bottom-0 h-0.5 bg-[#d4af7f] w-0 group-hover:w-full transition-all duration-300"></div>
+          </button>
+          
+          <button
+            onClick={() => {
+              setGameStarted(false);
+              setPlayerName("");
+              setMenuOpen(false);
+            }}
+            className="relative group flex flex-col items-center px-3 py-2 rounded-lg transition-all duration-300 bg-[#a87c4f]/30 hover:bg-[#a87c4f]/50"
+          >
+            <span className="text-2xl mb-1 group-hover:scale-110 group-hover:text-[#f5e5b8] transition-all">
+              🏰
+            </span>
+            <span className="text-xs text-[#d4af7f] opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-5">
+              Menú
+            </span>
+            <div className="absolute bottom-0 h-0.5 bg-[#d4af7f] w-0 group-hover:w-full transition-all duration-300"></div>
+          </button>
         </div>
-      )}
+      </div>
     </div>
   );
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[#3c2f2f] to-[#201a1a] text-[#f5e5b8] font-serif p-6 flex items-center justify-center relative">
+    <main className="min-h-screen bg-gradient-to-br from-[#3c2f2f] to-[#201a1a] text-[#f5e5b8] font-serif pt-24 pb-6 px-6 flex items-center justify-center relative">
       <Navbar />
+      
+      {/* Modal de Felicitaciones */}
+      {showCongratulations && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+          <div className="bg-[#2e221f] border-2 border-[#d4af7f] rounded-lg p-6 max-w-md w-full mx-4 text-center">
+            <h2 className="text-3xl font-bold text-[#d4af7f] mb-4">¡Felicidades {playerName}!</h2>
+            <p className="text-xl mb-6">¡Completaste el juego en {time} segundos con {attempts} intentos!</p>
+            <div className="flex justify-center space-x-4">
+              <button
+                onClick={() => {
+                  closeCongratulations();
+                  generateCards();
+                }}
+                className="bg-[#a87c4f] hover:bg-[#c69b6d] text-white px-4 py-2 rounded text-lg"
+              >
+                Jugar de nuevo
+              </button>
+              <button
+                onClick={() => {
+                  closeCongratulations();
+                  setGameStarted(false);
+                }}
+                className="bg-[#3c2f2f] hover:bg-[#4a3a3a] border border-[#a87c4f] text-[#f5e5b8] px-4 py-2 rounded text-lg"
+              >
+                Menú principal
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {!gameStarted ? (
         <div className="bg-[#2e221f] p-8 rounded-lg shadow-lg border border-[#a87c4f] w-full max-w-md text-center">
-          <h1 className="text-4xl font-bold mb-6 text-[#d4af7f]">Memorama</h1>
+          <h1 className="text-4xl font-bold mb-6 text-[#d4af7f]">Iniciar</h1>
           <input
             type="text"
             placeholder="Ingresa tu nombre"
@@ -166,7 +235,7 @@ export default function Page() {
           </button>
         </div>
       ) : (
-        <div className="max-w-6xl mx-auto bg-[#2e221f] rounded-lg shadow-lg border border-[#a87c4f] p-6 w-full">
+        <div className="max-w-6xl mx-auto bg-[#2e221f] rounded-lg shadow-lg border border-[#a87c4f] p-6 w-full mt-8">
           <h1 className="text-3xl font-bold text-center mb-4 text-[#d4af7f]">¡Suerte, {playerName}!</h1>
 
           <div className="flex justify-between text-lg mb-6 px-2">
