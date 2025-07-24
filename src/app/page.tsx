@@ -187,7 +187,7 @@ export default function Page() {
     <main className="min-h-screen bg-gradient-to-br from-[#3c2f2f] to-[#201a1a] text-[#f5e5b8] font-serif pt-24 pb-6 px-6 flex items-center justify-center relative">
       <Navbar />
       
-      {/* Modal de Felicitaciones */}
+    
       {showCongratulations && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
           <div className="bg-[#2e221f] border-2 border-[#d4af7f] rounded-lg p-6 max-w-md w-full mx-4 text-center">
