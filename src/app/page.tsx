@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const TOTAL_PAIRS = 12;
 
@@ -19,8 +19,12 @@ export default function Page() {
   const [timerRunning, setTimerRunning] = useState(false);
   const [ranking, setRanking] = useState<{ time: number; attempts: number }[]>([]);
 
+  const flipSoundRef = useRef<HTMLAudioElement | null>(null); // Referencia para el sonido
+
   useEffect(() => {
     generateCards();
+    flipSoundRef.current = new Audio("/sounds/sonidocarta.mp3"); // Carga el sonido
+
     const storedRanking = localStorage.getItem("ranking");
     if (storedRanking) setRanking(JSON.parse(storedRanking));
   }, []);
@@ -64,6 +68,11 @@ export default function Page() {
 
     const newFlipped = [...flipped, cardId];
     setFlipped(newFlipped);
+
+    if (flipSoundRef.current) {
+      flipSoundRef.current.currentTime = 0;
+      flipSoundRef.current.play();
+    }
 
     if (newFlipped.length === 2) {
       const [firstId, secondId] = newFlipped;
