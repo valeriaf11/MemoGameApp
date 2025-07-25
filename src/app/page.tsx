@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const TOTAL_PAIRS = 12;
 
@@ -25,6 +26,7 @@ export default function Page() {
   const [playerName, setPlayerName] = useState("");
   const [gameStarted, setGameStarted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(false);
 
   const flipSoundRef = useRef<HTMLAudioElement | null>(null);
 
@@ -148,9 +150,7 @@ export default function Page() {
           </button>
           
           <button
-            onClick={() => {
-              alert("Instrucciones del juego:\n\n1. Encuentra todas las parejas de cartas\n2. Haz clic en dos cartas para voltearlas\n3. Si son iguales, permanecerán visibles\n4. Completa el juego en el menor tiempo y con los menos intentos posibles");
-            }}
+            onClick={() => setShowInstructions(true)}
             className="relative group flex flex-col items-center px-3 py-2 rounded-lg transition-all duration-300 hover:bg-[#3c2f2f]"
           >
             <span className="text-2xl mb-1 group-hover:scale-110 group-hover:text-[#f5e5b8] transition-all">
@@ -180,6 +180,43 @@ export default function Page() {
           </button>
         </div>
       </div>
+
+      {showInstructions && (
+        <div className="fixed inset-0 bg-[#3c2f2f]/90 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-[#2e221f] border-4 border-[#d4af7f] rounded-xl p-6 max-w-2xl w-full mx-4 text-center relative shadow-2xl">
+            <div className="absolute -top-3 -right-3 bg-[#d4af7f] rounded-full w-10 h-10 flex items-center justify-center shadow-lg">
+              <button
+                onClick={() => setShowInstructions(false)}
+                className="text-[#2e221f] font-bold text-xl hover:scale-110 transition-transform"
+              >
+                ×
+              </button>
+            </div>
+            
+            <h2 className="text-3xl font-bold text-[#d4af7f] mb-6 font-medieval tracking-wide">
+               Instrucciones del Memorama 
+            </h2>
+            
+            <div className="mb-6 overflow-auto max-h-[60vh] bg-[#3c2f2f]/50 p-4 rounded-lg border border-[#a87c4f]/50">
+              <Image
+                src="/images/INSTRUCTIVO01.png"
+                alt="Instructivo del juego"
+                width={600}
+                height={400}
+                className="rounded-lg border-2 border-[#a87c4f] mx-auto shadow-lg"
+                style={{
+                  background: "linear-gradient(135deg, #3c2f2f 0%, #2e221f 100%)",
+                  padding: "0.5rem"
+                }}
+              />
+            </div>
+            
+            <div className="mt-4 text-[#f5e5b8] text-sm italic">
+              Haz clic en las cartas para encontrar los pares correspondientes
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 
@@ -187,7 +224,6 @@ export default function Page() {
     <main className="min-h-screen bg-gradient-to-br from-[#3c2f2f] to-[#201a1a] text-[#f5e5b8] font-serif pt-24 pb-6 px-6 flex items-center justify-center relative">
       <Navbar />
       
-    
       {showCongratulations && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
           <div className="bg-[#2e221f] border-2 border-[#d4af7f] rounded-lg p-6 max-w-md w-full mx-4 text-center">
