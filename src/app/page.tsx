@@ -129,18 +129,18 @@ export default function Page() {
     <div className="fixed top-0 left-0 right-0 z-50">
       <div className="h-1 bg-gradient-to-r from-[#a87c4f] via-[#d4af7f] to-[#a87c4f]"></div>
       
-      <div className="bg-[#2e221f]/95 backdrop-blur-md px-6 py-3 flex justify-between items-center shadow-lg">
-        <Link href="/" className="flex items-center group">
-          <div className="text-3xl mr-2 text-[#d4af7f] group-hover:rotate-12 transition-transform">♛</div>
-          <span className="text-2xl font-bold text-[#f5e5b8] font-medieval tracking-wider">Memorama</span>
+      <div className="bg-[#2e221f]/95 backdrop-blur-md px-4 sm:px-6 py-3 flex flex-col sm:flex-row justify-between items-center shadow-lg">
+        <Link href="/" className="flex items-center group mb-2 sm:mb-0">
+          <div className="text-2xl sm:text-3xl mr-2 text-[#d4af7f] group-hover:rotate-12 transition-transform">♛</div>
+          <span className="text-xl sm:text-2xl font-bold text-[#f5e5b8] font-medieval tracking-wider">Memorama</span>
         </Link>
 
-        <div className="flex space-x-4">
+        <div className="flex space-x-2 sm:space-x-4">
           <button
             onClick={() => router.push('/acerca-de')}
-            className="relative group flex flex-col items-center px-3 py-2 rounded-lg transition-all duration-300 hover:bg-[#3c2f2f]"
+            className="relative group flex flex-col items-center px-2 sm:px-3 py-1 sm:py-2 rounded-lg transition-all duration-300 hover:bg-[#3c2f2f]"
           >
-            <span className="text-2xl mb-1 group-hover:scale-110 group-hover:text-[#f5e5b8] transition-all">
+            <span className="text-xl sm:text-2xl mb-1 group-hover:scale-110 group-hover:text-[#f5e5b8] transition-all">
               📘
             </span>
             <span className="text-xs text-[#d4af7f] opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-5">
@@ -151,9 +151,9 @@ export default function Page() {
           
           <button
             onClick={() => setShowInstructions(true)}
-            className="relative group flex flex-col items-center px-3 py-2 rounded-lg transition-all duration-300 hover:bg-[#3c2f2f]"
+            className="relative group flex flex-col items-center px-2 sm:px-3 py-1 sm:py-2 rounded-lg transition-all duration-300 hover:bg-[#3c2f2f]"
           >
-            <span className="text-2xl mb-1 group-hover:scale-110 group-hover:text-[#f5e5b8] transition-all">
+            <span className="text-xl sm:text-2xl mb-1 group-hover:scale-110 group-hover:text-[#f5e5b8] transition-all">
               📝
             </span>
             <span className="text-xs text-[#d4af7f] opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-5">
@@ -168,9 +168,9 @@ export default function Page() {
               setPlayerName("");
               setMenuOpen(false);
             }}
-            className="relative group flex flex-col items-center px-3 py-2 rounded-lg transition-all duration-300 bg-[#a87c4f]/30 hover:bg-[#a87c4f]/50"
+            className="relative group flex flex-col items-center px-2 sm:px-3 py-1 sm:py-2 rounded-lg transition-all duration-300 bg-[#a87c4f]/30 hover:bg-[#a87c4f]/50"
           >
-            <span className="text-2xl mb-1 group-hover:scale-110 group-hover:text-[#f5e5b8] transition-all">
+            <span className="text-xl sm:text-2xl mb-1 group-hover:scale-110 group-hover:text-[#f5e5b8] transition-all">
               🏰
             </span>
             <span className="text-xs text-[#d4af7f] opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-5">
@@ -183,21 +183,21 @@ export default function Page() {
 
       {showInstructions && (
         <div className="fixed inset-0 bg-[#3c2f2f]/90 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-[#2e221f] border-4 border-[#d4af7f] rounded-xl p-6 max-w-2xl w-full mx-4 text-center relative shadow-2xl">
-            <div className="absolute -top-3 -right-3 bg-[#d4af7f] rounded-full w-10 h-10 flex items-center justify-center shadow-lg">
+          <div className="bg-[#2e221f] border-4 border-[#d4af7f] rounded-xl p-4 sm:p-6 max-w-2xl w-full mx-4 text-center relative shadow-2xl">
+            <div className="absolute -top-3 -right-3 bg-[#d4af7f] rounded-full w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center shadow-lg">
               <button
                 onClick={() => setShowInstructions(false)}
-                className="text-[#2e221f] font-bold text-xl hover:scale-110 transition-transform"
+                className="text-[#2e221f] font-bold text-lg sm:text-xl hover:scale-110 transition-transform"
               >
                 ×
               </button>
             </div>
             
-            <h2 className="text-3xl font-bold text-[#d4af7f] mb-6 font-medieval tracking-wide">
-               Instrucciones del Memorama 
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#d4af7f] mb-4 sm:mb-6 font-medieval tracking-wide">
+              Instrucciones del Memorama 
             </h2>
             
-            <div className="mb-6 overflow-auto max-h-[60vh] bg-[#3c2f2f]/50 p-4 rounded-lg border border-[#a87c4f]/50">
+            <div className="mb-4 sm:mb-6 overflow-auto max-h-[60vh] bg-[#3c2f2f]/50 p-2 sm:p-4 rounded-lg border border-[#a87c4f]/50">
               <Image
                 src="/images/INSTRUCTIVO01.png"
                 alt="Instructivo del juego"
@@ -211,7 +211,7 @@ export default function Page() {
               />
             </div>
             
-            <div className="mt-4 text-[#f5e5b8] text-sm italic">
+            <div className="mt-2 sm:mt-4 text-[#f5e5b8] text-xs sm:text-sm italic">
               Haz clic en las cartas para encontrar los pares correspondientes
             </div>
           </div>
@@ -221,21 +221,21 @@ export default function Page() {
   );
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[#3c2f2f] to-[#201a1a] text-[#f5e5b8] font-serif pt-24 pb-6 px-6 flex items-center justify-center relative">
+    <main className="min-h-screen bg-gradient-to-br from-[#3c2f2f] to-[#201a1a] text-[#f5e5b8] font-serif pt-24 pb-6 px-4 sm:px-6 flex items-center justify-center relative">
       <Navbar />
       
       {showCongratulations && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
-          <div className="bg-[#2e221f] border-2 border-[#d4af7f] rounded-lg p-6 max-w-md w-full mx-4 text-center">
-            <h2 className="text-3xl font-bold text-[#d4af7f] mb-4">¡Felicidades {playerName}!</h2>
-            <p className="text-xl mb-6">¡Completaste el juego en {time} segundos con {attempts} intentos!</p>
-            <div className="flex justify-center space-x-4">
+          <div className="bg-[#2e221f] border-2 border-[#d4af7f] rounded-lg p-4 sm:p-6 max-w-md w-full mx-4 text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#d4af7f] mb-4">¡Felicidades {playerName}!</h2>
+            <p className="text-lg sm:text-xl mb-4 sm:mb-6">¡Completaste el juego en {time} segundos con {attempts} intentos!</p>
+            <div className="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-4">
               <button
                 onClick={() => {
                   closeCongratulations();
                   generateCards();
                 }}
-                className="bg-[#a87c4f] hover:bg-[#c69b6d] text-white px-4 py-2 rounded text-lg"
+                className="bg-[#a87c4f] hover:bg-[#c69b6d] text-white px-4 py-2 rounded text-sm sm:text-lg"
               >
                 Jugar de nuevo
               </button>
@@ -244,7 +244,7 @@ export default function Page() {
                   closeCongratulations();
                   setGameStarted(false);
                 }}
-                className="bg-[#3c2f2f] hover:bg-[#4a3a3a] border border-[#a87c4f] text-[#f5e5b8] px-4 py-2 rounded text-lg"
+                className="bg-[#3c2f2f] hover:bg-[#4a3a3a] border border-[#a87c4f] text-[#f5e5b8] px-4 py-2 rounded text-sm sm:text-lg"
               >
                 Menú principal
               </button>
@@ -254,36 +254,36 @@ export default function Page() {
       )}
 
       {!gameStarted ? (
-        <div className="bg-[#2e221f] p-8 rounded-lg shadow-lg border border-[#a87c4f] w-full max-w-md text-center">
-          <h1 className="text-4xl font-bold mb-6 text-[#d4af7f]">Iniciar</h1>
+        <div className="bg-[#2e221f] p-6 sm:p-8 rounded-lg shadow-lg border border-[#a87c4f] w-full max-w-md text-center mx-4">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6 text-[#d4af7f]">Iniciar</h1>
           <input
             type="text"
             placeholder="Ingresa tu nombre"
             value={playerName}
             onChange={(e) => setPlayerName(e.target.value)}
-            className="w-full p-3 mb-4 text-white bg-[#3c2f2f] rounded border border-[#a87c4f] focus:outline-none placeholder:text-[#d4af7f]"
+            className="w-full p-2 sm:p-3 mb-4 text-white bg-[#3c2f2f] rounded border border-[#a87c4f] focus:outline-none placeholder:text-[#d4af7f] text-sm sm:text-base"
           />
           <button
             onClick={handleStartGame}
-            className="bg-[#a87c4f] hover:bg-[#c69b6d] text-white px-6 py-3 rounded text-lg"
+            className="bg-[#a87c4f] hover:bg-[#c69b6d] text-white px-4 sm:px-6 py-2 sm:py-3 rounded text-base sm:text-lg"
           >
             🎮 Comenzar Partida
           </button>
         </div>
       ) : (
-        <div className="max-w-6xl mx-auto bg-[#2e221f] rounded-lg shadow-lg border border-[#a87c4f] p-6 w-full mt-8">
-          <h1 className="text-3xl font-bold text-center mb-4 text-[#d4af7f]">¡Suerte, {playerName}!</h1>
+        <div className="max-w-6xl mx-auto bg-[#2e221f] rounded-lg shadow-lg border border-[#a87c4f] p-4 sm:p-6 w-full mt-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4 text-[#d4af7f]">¡Suerte, {playerName}!</h1>
 
-          <div className="flex justify-between text-lg mb-6 px-2">
+          <div className="flex flex-col sm:flex-row justify-between text-base sm:text-lg mb-4 sm:mb-6 px-2 gap-2">
             <p>⏳ Tiempo: <span className="text-[#e4c590]">{time}s</span></p>
             <p>🧠 Intentos: <span className="text-[#e4c590]">{attempts}</span></p>
           </div>
 
-          <div className="grid grid-cols-6 gap-2 justify-center mb-8">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2 justify-center mb-6 sm:mb-8">
             {cards.map((card) => (
               <div
                 key={card.id}
-                className="w-24 h-24 border-2 border-[#a87c4f] rounded overflow-hidden bg-[#5a4332] hover:scale-105 transform transition duration-200 cursor-pointer"
+                className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 border-2 border-[#a87c4f] rounded overflow-hidden bg-[#5a4332] hover:scale-105 transform transition duration-200 cursor-pointer"
                 onClick={() => handleFlip(card.id)}
               >
                 <img
@@ -302,18 +302,18 @@ export default function Page() {
           <div className="text-center">
             <button
               onClick={generateCards}
-              className="bg-[#a87c4f] hover:bg-[#c69b6d] text-white px-6 py-2 rounded text-lg"
+              className="bg-[#a87c4f] hover:bg-[#c69b6d] text-white px-4 sm:px-6 py-1 sm:py-2 rounded text-base sm:text-lg"
             >
               🔄 Reiniciar Juego
             </button>
           </div>
 
-          <div className="mt-8 bg-[#3c2f2f] rounded p-4 border border-[#a87c4f]">
-            <h2 className="text-2xl text-[#d4af7f] font-semibold mb-2">🏆 Ranking</h2>
-            <ul className="list-decimal pl-6 space-y-1">
-              {ranking.length === 0 && <p className="text-sm text-[#e4c590]">No hay partidas registradas aún.</p>}
+          <div className="mt-6 sm:mt-8 bg-[#3c2f2f] rounded p-3 sm:p-4 border border-[#a87c4f]">
+            <h2 className="text-xl sm:text-2xl text-[#d4af7f] font-semibold mb-2">🏆 Ranking</h2>
+            <ul className="list-decimal pl-5 sm:pl-6 space-y-1 text-sm sm:text-base">
+              {ranking.length === 0 && <p className="text-xs sm:text-sm text-[#e4c590]">No hay partidas registradas aún.</p>}
               {ranking.map((r, i) => (
-                <li key={i}>
+                <li key={i} className="break-words">
                   <span className="text-[#f5e5b8]">#{i + 1}</span> - {r.name} | Tiempo: {r.time}s | Intentos: {r.attempts}
                 </li>
               ))}
