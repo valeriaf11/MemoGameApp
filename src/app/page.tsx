@@ -252,17 +252,16 @@ export default function Page() {
           </div>
         </div>
       )}
-
       {!gameStarted ? (
         <div className="bg-[#2e221f] p-6 sm:p-8 rounded-lg shadow-lg border border-[#a87c4f] w-full max-w-md text-center mx-4">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6 text-[#d4af7f]">Iniciar</h1>
-          <input
-            type="text"
-            placeholder="Ingresa tu nombre"
-            value={playerName}
-            onChange={(e) => setPlayerName(e.target.value)}
-            className="w-full p-2 sm:p-3 mb-4 text-white bg-[#3c2f2f] rounded border border-[#a87c4f] focus:outline-none placeholder:text-[#d4af7f] text-sm sm:text-base"
-          />
+         <h1 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6 text-[#d4af7f]">Iniciar</h1>
+         <input
+         type="text"
+         placeholder="Ingresa tu nombre"
+         value={playerName}
+         onChange={(e) => setPlayerName(e.target.value)}
+          className="w-full p-2 sm:p-3 mb-4 text-white bg-[#3c2f2f] rounded border border-[#a87c4f] focus:outline-none placeholder:text-[#d4af7f] text-sm sm:text-base text-center placeholder:text-center"
+           /> 
           <button
             onClick={handleStartGame}
             className="bg-[#a87c4f] hover:bg-[#c69b6d] text-white px-4 sm:px-6 py-2 sm:py-3 rounded text-base sm:text-lg"
@@ -307,18 +306,20 @@ export default function Page() {
               🔄 Reiniciar Juego
             </button>
           </div>
-
-          <div className="mt-6 sm:mt-8 bg-[#3c2f2f] rounded p-3 sm:p-4 border border-[#a87c4f]">
-            <h2 className="text-xl sm:text-2xl text-[#d4af7f] font-semibold mb-2">🏆 Ranking</h2>
-            <ul className="list-decimal pl-5 sm:pl-6 space-y-1 text-sm sm:text-base">
-              {ranking.length === 0 && <p className="text-xs sm:text-sm text-[#e4c590]">No hay partidas registradas aún.</p>}
-              {ranking.map((r, i) => (
-                <li key={i} className="break-words">
-                  <span className="text-[#f5e5b8]">#{i + 1}</span> - {r.name} | Tiempo: {r.time}s | Intentos: {r.attempts}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <div className="mt-4 bg-[#3c2f2f] rounded p-2 border border-[#a87c4f] max-w-md mx-auto text-center">
+         <h2 className="text-lg sm:text-xl text-[#d4af7f] font-semibold mb-1">🏆 Ranking</h2>
+         <ul className="pl-0 space-y-0.5 text-xs sm:text-sm max-h-40 overflow-y-auto">
+          {ranking.length === 0 && (
+         <p className="text-xs sm:text-sm text-[#e4c590]">No hay partidas registradas aún.</p>
+         )}
+          {ranking.map((r, i) => (
+          <li key={i} className="break-words text-center flex justify-center gap-1">
+            <span className="text-[#f5e5b8] font-semibold">#{i + 1}</span>
+           <span>{r.name} | Tiempo: {r.time}s | Intentos: {r.attempts}</span>
+              </li>
+             ))}
+          </ul>
+        </div>
         </div>
       )}
     </main>
